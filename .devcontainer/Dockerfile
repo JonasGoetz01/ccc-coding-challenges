@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     zsh \
     nano \
     cmake \
+    ripgrep \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -31,6 +32,13 @@ RUN curl -sS https://starship.rs/install.sh | sh -s -- -b /usr/local/bin -y
 RUN echo 'eval "$(starship init zsh)"' >> /root/.zshrc
 
 COPY ./starship.toml /root/.config/starship.toml
+
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz &&\
+    rm -rf /opt/nvim && \
+    tar -C /opt -xzf nvim-linux64.tar.gz && \
+    echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> /root/.zshrc
+
+RUN git clone https://github.com/NvChad/starter ~/.config/nvim
 
 SHELL ["zsh"]
 
