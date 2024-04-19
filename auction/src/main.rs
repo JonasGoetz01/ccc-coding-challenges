@@ -1,11 +1,5 @@
 use std::env;
 
-#[derive(Clone)]
-struct Bet {
-    auctor: String,
-    amount: i32,
-}
-
 fn main() {
     let second_arg = env::args().nth(1).expect("No second argument provided");
     let input: Vec<&str> = second_arg.split(",").collect();
